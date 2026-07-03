@@ -14,7 +14,7 @@ R     R     W        ← Researcher, Reviewer, Writer
   Answer
 ```
 
-## Prompt and Output
+## Prompt and Output Example
 
 ```bash
 ########################## 
