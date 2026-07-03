@@ -7,7 +7,7 @@ User Query
     ↓
  SUPERVISOR (LLM)
   ↙    ↓    ↘
-R     C     W        ← Researcher, Coder, Writer
+R     R     W        ← Researcher, Reviewer, Writer
   ↘    ↑    ↗
  SUPERVISOR (LLM)    ← sees all results, decides next step
     ↓

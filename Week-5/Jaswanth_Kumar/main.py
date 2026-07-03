@@ -33,16 +33,6 @@ def web_search(query:str) -> str:
     )
     return response
 
-@tool
-def run_python(code: str) -> str:
-    """Execute Python code and return the output."""
-    # use a sandboxed executor in production
-    import io, contextlib
-    output = io.StringIO()
-    with contextlib.redirect_stdout(output):
-        exec(code)
-    return output.getvalue()
-
 
 # Create Specialised Agents
 
@@ -56,13 +46,13 @@ researcher = create_react_agent(
     )
 )
 
-coder = create_react_agent(
+reviewer = create_react_agent(
     llm,
-    tools=[run_python],
+    tools=[],
     name="coder",
     prompt=(
-        "You are a Python expert. Write clean, well-commented code. "
-        "Always test your code before returning results. Handle edge cases."
+        "You are a Review expert. Once review the data "
+        "Check the Data and It was correct. Handle edge cases."
     )
 )
 
@@ -72,7 +62,7 @@ writer = create_react_agent(
     name="writer",
     prompt=(
         "You are a professional technical writer. Synthesise research "
-        "and code into clear, structured reports. Use markdown formatting to write about that research text"
+        "and  structured reports. Use markdown formatting to write about that research text"
     )
 )
 
@@ -80,14 +70,14 @@ writer = create_react_agent(
 # Create the Supervisor
 
 supervisor = create_supervisor(
-    agents=[researcher, coder, writer],
+    agents=[researcher, reviewer, writer],
     model=llm,
     prompt=(
         """You are a supervisor.
             Rules:
                 - Every research request MUST be handled by the researcher.
-                - Every coding request MUST be handled by the coder.
-                - After the researcher or coder finishes, you MUST delegate to the writer.
+                - Every review request MUST be handled by the reviewer.
+                - After the researcher or reviewer finishes, you MUST delegate to the writer.
                 - Never answer the user yourself.
                 - The writer's response must always be the final response returned to the user.
                 - Return the writer's response exactly as written without modifying, shortening, or rephrasing it.
