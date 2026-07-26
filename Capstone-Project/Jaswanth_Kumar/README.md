@@ -1,8 +1,8 @@
-# Capstone Project
+# 🛡️ Guarded Domain Agent – Customer Support Assistant
 
 - [Google_Colab_Link](https://colab.research.google.com/drive/1W_Uc1qHB9fuQH3iw54-EHeUnJXjv0p_k?usp=sharing)
 
-## Project Detail
+## Problem Statement
 
 ```bash
 Capstone Project PS: Guarded Domain Agent
@@ -19,8 +19,6 @@ Constraints the agent must hold under adversarial input:
 3.Never execute an out-of-scope tool call (e.g. a “refund” tool should never fire from a message about weather)
 4.Must still answer 3 fixed benign queries correctly (sanity baseline)
 ```
-
-## 🛡️ Guarded Domain Agent – Customer Support Assistant
 
 ## Overview
 
@@ -51,6 +49,8 @@ Guarded_Domain_Agent/
 └── README.md
 ```
 
+![Architecture](image.png)
+
 ---
 
 ## Tools
@@ -67,7 +67,7 @@ Retrieves information from the local knowledge base.
 - Payment Methods
 - Frequently Asked Questions
 
-Documents which will be tokensied and give you the result
+Documents are tokenized, embedded, and stored in a local FAISS vector database for retrieval and gives the result
 
 #### Input Schema 1
 
